@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\EventsController;
+use App\Http\Controllers\PagesController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -15,16 +17,18 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
-});
+    return view('layouts/base');
+})->name('home');
 
-Route::get('testroute', function () {
-    return view('testroute');
-});
+Route::get('pages/events', [PagesController::class, 'events'])->name('events');
 
-Route::get('testroute2', function () {
-    return view('testroute2');
-});
+Route::get('pages/testroute', [PagesController::class, 'testroute'])->name('testroute'); 
+
+Route::get('pages/testroute2', [PagesController::class, 'testroute2'])->name('testroute2'); 
+
+Route::group(['prefix' => 'dashboard', 'middleware' => 'auth'], function() {
+    Route::resource('events', EventsController::class); });
+
 
 Route::get('/dashboard', function () {
     return view('dashboard');
