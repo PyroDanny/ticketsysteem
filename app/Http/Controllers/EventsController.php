@@ -21,7 +21,7 @@ class EventsController extends Controller
      */
     public function create()
     {
-        //
+        return view('dashboard/events/create'); 
     }
 
     /**
@@ -29,15 +29,44 @@ class EventsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request,[
+            'name' => 'required',
+            'photo' => 'required',
+            'event_start' => 'required|date',
+            'event_end' => 'required|date',
+            'max_tickets' => 'required|numeric',
+            'location' => 'required',
+            'address' => 'required',
+            'zip' => 'required',
+            'price' => 'numeric',
+            'preorder_price' => 'required',
+            'description' => 'required|min:10'
+        ]);
+
+        $event = new Event();
+        $event->name = $request->name;
+        $event->photo = $request->photo;
+        $event->event_start = $request->event_start;
+        $event->event_end = $request->event_end;
+        $event->max_tickets = $request->max_tickets;
+        $event->location = $request->location;
+        $event->address = $request->address;
+        $event->zip = $request->zip;
+        $event->price = $request->price;
+        $event->preorder_price = $request->preorder_price;
+        $event->description = $request->description;
+        $event->save();
+
+        return redirect()->route('events.index');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show($id)
     {
-        //
+        $event = Event::findOrFail($id);
+        return view('dashboard/events/show')->with('event', $event);
     }
 
     /**

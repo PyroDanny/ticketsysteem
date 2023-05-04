@@ -19,6 +19,8 @@ return new class extends Migration
             $table->dateTime('event_end');
             $table->integer('max_tickets');	
             $table->string('location');
+            $table->string('address');
+            $table->string('zip');
             $table->double('price');
             $table->double('preorder_price');
             $table->longText('description');

@@ -21,6 +21,8 @@ class EventSeeder extends Seeder
         $event->event_end = '2022-06-25';
         $event->max_tickets = '999';
         $event->location = 'Breda';
+        $event->address = 'Wolfstraat 85';
+        $event->zip = '5701WV';
         $event->price = '19.99';
         $event->preorder_price = '15';
         $event->description = 'lorem ipsum';
@@ -33,6 +35,8 @@ class EventSeeder extends Seeder
         $event->event_end = '2022-06-25';
         $event->max_tickets = '999';
         $event->location = 'Helmond';
+        $event->address = 'Wolfstraat 85';
+        $event->zip = '5701WV';
         $event->price = '19.99';
         $event->preorder_price = '15';
         $event->description = 'lorem ipsum';
