@@ -8,7 +8,8 @@ use Illuminate\Http\Request;
 class PagesController extends Controller
 {
     public function events(){
-        $events = Event::where('event_start', '<', now())->get();
+        // $events = Event::where('event_start', '<', now())->get();
+        $events = Event::all();
         return view('pages/events')->with('events', $events);
     }
 

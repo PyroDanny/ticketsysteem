@@ -24,11 +24,13 @@ Route::get('/', function () {
 return view('layouts/base');
 })->name('home');
 
-Route::get('pages/events', [PagesController::class, 'events'])->name('events');
+Route::get('/events',  [PagesController::class, 'events'])->name('events');
 
-Route::get('pages/testroute', [PagesController::class, 'testroute'])->name('testroute'); 
+// Route::get('pages/events', [PagesController::class, 'events'])->name('events');
 
-Route::get('pages/testroute2', [PagesController::class, 'testroute2'])->name('testroute2'); 
+Route::get('/testroute', [PagesController::class, 'testroute'])->name('testroute'); 
+
+Route::get('/testroute2', [PagesController::class, 'testroute2'])->name('testroute2'); 
 
 Route::group(['prefix' => 'dashboard', 'middleware' => 'auth'], function() {
     Route::resource('events', EventsController::class); });

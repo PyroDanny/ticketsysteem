@@ -38,7 +38,7 @@ class EventsController extends Controller
             'location' => 'required',
             'address' => 'required',
             'zip' => 'required',
-            'price' => 'numeric',
+            'price' => 'required|numeric',
             'preorder_price' => 'required',
             'description' => 'required|min:10'
         ]);
@@ -74,7 +74,9 @@ class EventsController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $event = Event::findOrFail($id);
+        return view('dashboard/events/edit')
+        ->with(['event' => $event]);
     }
 
     /**
@@ -82,7 +84,35 @@ class EventsController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $this->validate($request, [
+            'name' => 'required',
+            'photo' => 'required',
+            'event_start' => 'required|date',
+            'event_end' => 'required|date',
+            'max_tickets' => 'required|numeric',
+            'location' => 'required',
+            'address' => 'required',
+            'zip' => 'required',
+            'price' => 'required|numeric',
+            'preorder_price' => 'required',
+            'description' => 'required|min:10'
+        ]);
+
+        $event = Event::findOrFail($id);
+        $event->name = $request->name;
+        $event->photo = $request->photo;
+        $event->event_start = $request->event_start;
+        $event->event_end = $request->event_end;
+        $event->max_tickets = $request->max_tickets;
+        $event->location = $request->location;
+        $event->address = $request->address;
+        $event->zip = $request->zip;
+        $event->price = $request->price;
+        $event->preorder_price = $request->preorder_price;
+        $event->description = $request->description;
+        $event->save();
+
+        return back()->with('success', 'Event adjusted!');
     }
 
     /**
@@ -90,6 +120,7 @@ class EventsController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        Event::destroy($id);
+        return redirect()->route('events.index');
     }
 }

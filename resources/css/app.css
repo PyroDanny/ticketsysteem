@@ -1,1 +1,7 @@
+.buttons {
+    display: flex;
+}
 
+.btn-danger{
+    margin-left: .5em;
+}
